@@ -35,7 +35,7 @@
                 <div class="col-md-4">
                     <div class="withdraw rounded p-5 text-white">
                         <h5>Withdraw</h5>
-                        <h2>$ <span id="withdraw_balance">000</span></h2>
+                        <h2>$ <span id="current_withdraw">000</span></h2>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -80,11 +80,8 @@
         depositBtn.addEventListener("click", function(){
             const depositAmount = getInputAmount("deposit_input");
 
-            // add to deposit balance
-            depositBalance("current_deposit", depositAmount);
-
-            //add to main balance
-            depositBalance("current_balance", depositAmount);
+            updateBalance("current_deposit", depositAmount);
+            updateBalance("current_balance", depositAmount);
 
             document.getElementById("deposit_input").value = "" ;
         });
@@ -93,6 +90,11 @@
         const withdrawBtn = document.getElementById("withdraw_btn");
         withdrawBtn.addEventListener("click", function(){
             const withdrawAmount = getInputAmount("withdraw_input");
+
+            updateBalance("current_withdraw", withdrawAmount);
+            updateBalance("current_balance", -1 * withdrawAmount);
+
+            document.getElementById("withdraw_input").value = "" ;
         })
 
         function getInputAmount(id){
@@ -101,7 +103,7 @@
             return amount;
         }
 
-        function depositBalance(id, depositAmount){
+        function updateBalance(id, depositAmount){
             const current = document.getElementById(id).innerText;
             const currentNumber = parseFloat(current);
             const totalAmount = depositAmount + currentNumber;
