@@ -1,3 +1,20 @@
 .submit_area{
     width: ;
 }
+
+.transection_area{
+    display: none;
+}
+
+.deposit{
+    background-color: slateblue;
+}
+
+.withdraw{
+    background-color: salmon;
+}
+
+.balance{
+    background-color: orange;
+}
+
